@@ -1,3 +1,10 @@
 from django.contrib import admin
+from .models import (
+    Department,
+    Workgroup,
+    Employee,
+)
 
-# Register your models here.
+admin.site.register(Department)
+admin.site.register(Workgroup)
+admin.site.register(Employee)
