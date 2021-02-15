@@ -7,6 +7,9 @@ from django.views.generic import (  # noqa
     UpdateView,
     DeleteView,
 )
+from django.contrib.auth.decorators import (
+    login_required,
+)
 
 from .models import (
     Employee,
@@ -16,7 +19,13 @@ from .forms import (
 )
 
 
-class ListEmployees(ListView):
+class LoginRequiredMixin:
+    @classmethod
+    def as_view(cls):
+        return login_required(super(LoginRequiredMixin, cls).as_view())
+
+
+class ListEmployees(LoginRequiredMixin, ListView):
     template_name = 'employee_list.html'
     context_object_name = 'employees'
 
