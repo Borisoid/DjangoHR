@@ -14,7 +14,7 @@ class Workgroup(models.Model):
 
 class Employee(models.Model):
     name = models.CharField(max_length=90, null=False, blank=False)
-    ocupation = models.CharField(max_length=90, null=False, blank=False)
+    occupation = models.CharField(max_length=90, null=False, blank=False)
     experience = models.PositiveIntegerField()
     salary = models.DecimalField(max_digits=8, decimal_places=2)
     vacation_days = models.PositiveIntegerField()
@@ -22,3 +22,6 @@ class Employee(models.Model):
     workgroup = models.ForeignKey(
         to=Workgroup, on_delete=models.SET_NULL, null=True
     )
+
+    def __repr__(self):
+        return f'{self.name} the {self.occupation}'
