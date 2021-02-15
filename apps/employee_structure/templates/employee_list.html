@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'header.html' %}
 
 {% block title %} Employees {% endblock %}
 
@@ -8,6 +8,7 @@
         {{ filter_form.as_p }}
         <button type="submit">Filter</button>
     </form>
+    <br>
 
     {% if employees %}
 
@@ -39,7 +40,7 @@
     {% else %}
 
         Nothing found
-        
+
     {% endif %}
 
 {% endblock %}

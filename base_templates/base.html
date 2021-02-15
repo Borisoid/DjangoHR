@@ -12,10 +12,29 @@
             border: 1px solid black;
             border-collapse: collapse;
         }
+        header {
+            display: flex;
+            border-bottom: 3px solid black;
+        }
+        a {
+            margin: 10px;
+        }
+        a.login {
+            margin-left: auto;
+        }
     </style>
     <title>{% block title %} HR {% endblock %}</title>
 </head>
 <body>
+
+    <header>
+        {% block header %}
+        {% endblock %}
+
+        <!-- LOGIN -->
+        <a href="" class="login">LOGIN</a>
+
+    </header>
     
     {% block content %}
     {% endblock %}
