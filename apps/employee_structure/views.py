@@ -71,6 +71,23 @@ class ListEmployees(LoginRequiredMixin, ListView):
         return context
 
 
+class GetEmployee(LoginRequiredMixin, ListView):
+    model = Employee
+    template_name = 'employee_page.html'
+    context_object_name = 'employee'
+
+    def get_queryset(self):
+        return Employee.objects \
+            .prefetch_related('workgroup', 'workgroup__department') \
+            .get(pk=self.kwargs.get('pk'))
+
+
+class DeleteEmployee(LoginRequiredMixin, DeleteView):
+    model = Employee
+    template_name = 'submit_delete_page.html'
+    success_url = reverse_lazy('employee_list')
+
+
 class AddEmployee(LoginRequiredMixin, CreateView):
     model = Employee
     fields = '__all__'
@@ -85,8 +102,41 @@ class AddWorkgroup(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('employee_list')
 
 
+class GetWorkgroup(LoginRequiredMixin, ListView):
+    model = Workgroup
+    template_name = 'workgroup_page.html'
+    context_object_name = 'workgroup'
+
+    def get_queryset(self):
+        return Workgroup.objects \
+            .prefetch_related('department') \
+            .get(pk=self.kwargs.get('pk'))
+
+
+class DeleteWorkgroup(LoginRequiredMixin, DeleteView):
+    model = Workgroup
+    template_name = 'submit_delete_page.html'
+    success_url = reverse_lazy('employee_list')
+
+
 class AddDepartment(LoginRequiredMixin, CreateView):
     model = Department
     fields = '__all__'
     template_name = 'form_page.html'
+    success_url = reverse_lazy('employee_list')
+
+
+class GetDepartment(LoginRequiredMixin, ListView):
+    model = Department
+    template_name = 'department_page.html'
+    context_object_name = 'department'
+
+    def get_queryset(self):
+        return Department.objects \
+            .get(pk=self.kwargs.get('pk'))
+
+
+class DeleteDepartment(LoginRequiredMixin, DeleteView):
+    model = Department
+    template_name = 'submit_delete_page.html'
     success_url = reverse_lazy('employee_list')

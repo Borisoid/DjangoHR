@@ -1,0 +1,15 @@
+{% extends 'header.html' %}
+
+{% block content %}
+
+    <p> <b>Name:            </b> {{ employee.name }}                    </p>
+    <p> <b>Occupation:      </b> {{ employee.occupation }}              </p>
+    <p> <b>Workgroup:       </b> {{ employee.workgroup }}               </p>
+    <p> <b>Department:      </b> {{ employee.workgroup.department }}    </p>
+    <p> <b>Experience:      </b> {{ employee.experience }}              </p>
+    <p> <b>Salary:          </b> {{ employee.salary }}                  </p>
+    <p> <b>Vacation days:   </b> {{ employee.vacation_days }}           </p>
+
+    <a href="{% url 'delete_employee' pk=employee.pk %}">DELETE</a>
+
+{% endblock %}

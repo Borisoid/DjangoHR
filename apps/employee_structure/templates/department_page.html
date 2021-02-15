@@ -1,0 +1,9 @@
+{% extends 'header.html' %}
+
+{% block content %}
+
+    <p> <b>Name:        </b> {{ department.name }}       </p>
+
+    <a href="{% url 'delete_department' pk=department.pk %}">DELETE</a>
+
+{% endblock %}

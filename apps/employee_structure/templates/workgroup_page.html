@@ -1,0 +1,10 @@
+{% extends 'header.html' %}
+
+{% block content %}
+
+    <p> <b>Name:        </b> {{ workgroup.name }}       </p>
+    <p> <b>Department:  </b> {{ workgroup.department }} </p>
+
+    <a href="{% url 'delete_workgroup' pk=workgroup.pk %}">DELETE</a>
+
+{% endblock %}

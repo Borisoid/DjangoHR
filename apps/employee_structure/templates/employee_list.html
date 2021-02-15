@@ -24,10 +24,26 @@
         {% for employee in employees %}
 
             <tr>
-                <td>{{ employee.name }}</td>
+                <td>
+                    <a href="{% url 'view_employee' pk=employee.pk %}">
+                        {{ employee.name }}
+                    </a>
+                </td>
                 <td>{{ employee.occupation }}</td>
-                <td>{{ employee.workgroup }}</td>
-                <td>{{ employee.workgroup.department }}</td>
+                <td>
+                    {% if employee.workgroup %}
+                    <a href="{% url 'view_workgroup' pk=employee.workgroup.pk %}">
+                        {{ employee.workgroup }}
+                    </a>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if employee.workgroup.department %}
+                    <a href="{% url 'view_department' pk=employee.workgroup.department.pk %}">
+                        {{ employee.workgroup.department }}
+                    </a>
+                    {% endif %}
+                </td>
                 <td>{{ employee.experience }}</td>
                 <td>{{ employee.salary }}</td>
                 <td>{{ employee.vacation_days }}</td>
