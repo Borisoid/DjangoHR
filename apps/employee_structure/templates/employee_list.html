@@ -4,6 +4,11 @@
 
 {% block content %}
 
+    <form method="get">
+        {{ filter_form.as_p }}
+        <button type="submit">Filter</button>
+    </form>
+
     {% if employees %}
 
         <table>
@@ -14,7 +19,9 @@
             <th>Стаж</th>
             <th>Зарплата</th>
             <th>Кол-во дней отпуска</th>
+
         {% for employee in employees %}
+
             <tr>
                 <td>{{ employee.name }}</td>
                 <td>{{ employee.occupation }}</td>
@@ -24,11 +31,15 @@
                 <td>{{ employee.salary }}</td>
                 <td>{{ employee.vacation_days }}</td>
             </tr>
+
         {% endfor %}
+
         </table>
 
     {% else %}
+
         Nothing found
+        
     {% endif %}
 
 {% endblock %}
