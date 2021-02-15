@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %} Employees {% endblock %}
+
+{% block content %}
+
+    {% if employees %}
+
+        <table>
+            <th>ФИО</th>
+            <th>Должность</th>
+            <th>Стаж</th>
+            <th>Зарплата</th>
+            <th>Кол-во дней отпуска</th>
+        {% for employee in employees %}
+            <tr>
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.ocupation }}</td>
+                <td>{{ employee.experience }}</td>
+                <td>{{ employee.salary }}</td>
+                <td>{{ employee.vacation_days }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+
+    {% else %}
+        Nothing found
+    {% endif %}
+
+{% endblock %}
