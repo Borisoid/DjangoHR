@@ -6,10 +6,16 @@ from django.db import (
 class Department(models.Model):
     name = models.CharField(max_length=90, null=False, blank=False)
 
+    def __str__(self):
+        return self.name
+
 
 class Workgroup(models.Model):
     name = models.CharField(max_length=90, null=False, blank=False)
     department = models.ForeignKey(to=Department, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 
 class Employee(models.Model):
@@ -23,5 +29,5 @@ class Employee(models.Model):
         to=Workgroup, on_delete=models.SET_NULL, null=True
     )
 
-    def __repr__(self):
+    def __str__(self):
         return f'{self.name} the {self.occupation}'
