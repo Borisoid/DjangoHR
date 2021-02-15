@@ -15,7 +15,7 @@ from django.urls import (
 )
 
 from .models import (
-    Employee,
+    Employee, Workgroup,
 )
 from .forms import (
     EmployeeFilrerForm,
@@ -71,6 +71,13 @@ class ListEmployees(LoginRequiredMixin, ListView):
 
 class AddEmployee(LoginRequiredMixin, CreateView):
     model = Employee
+    fields = '__all__'
+    template_name = 'form_page.html'
+    success_url = reverse_lazy('employee_list')
+
+
+class AddWorkgroup(LoginRequiredMixin, CreateView):
+    model = Workgroup
     fields = '__all__'
     template_name = 'form_page.html'
     success_url = reverse_lazy('employee_list')
