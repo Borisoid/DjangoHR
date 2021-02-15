@@ -10,6 +10,9 @@ from django.views.generic import (  # noqa
 from django.contrib.auth.decorators import (
     login_required,
 )
+from django.urls import (
+    reverse_lazy,
+)
 
 from .models import (
     Employee,
@@ -64,3 +67,10 @@ class ListEmployees(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['filter_form'] = EmployeeFilrerForm(self.request.GET)
         return context
+
+
+class AddEmployee(LoginRequiredMixin, CreateView):
+    model = Employee
+    fields = '__all__'
+    template_name = 'form_page.html'
+    success_url = reverse_lazy('employee_list')

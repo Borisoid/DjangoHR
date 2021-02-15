@@ -3,9 +3,11 @@ from django.urls import (
 )
 from .views import (
     ListEmployees,
+    AddEmployee,
 )
 
 
 urlpatterns = [
-    path('', ListEmployees.as_view())
+    path('view/employee_list', ListEmployees.as_view(), name='employee_list'),
+    path('add/employee', AddEmployee.as_view(), name='add_employee'),
 ]
