@@ -8,8 +8,8 @@ from django.views.generic import (  # noqa
     DeleteView,
     DetailView,
 )
-from django.contrib.auth.decorators import (
-    login_required,
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
 )
 from django.urls import (
     reverse_lazy,
@@ -23,12 +23,6 @@ from .models import (
 from .forms import (
     EmployeeFilrerForm,
 )
-
-
-class LoginRequiredMixin:
-    @classmethod
-    def as_view(cls):
-        return login_required(super(LoginRequiredMixin, cls).as_view())
 
 
 class ListEmployees(LoginRequiredMixin, ListView):
