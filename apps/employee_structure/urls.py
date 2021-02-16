@@ -4,8 +4,14 @@ from django.urls import (
 from .views import (
     AddDepartment,
     AddEmployee,
-    AddWorkgroup, DeleteDepartment,
-    DeleteEmployee, DeleteWorkgroup, GetDepartment,
+    AddWorkgroup,
+    DeleteDepartment,
+    DeleteEmployee,
+    DeleteWorkgroup,
+    EditDepartment,
+    EditEmployee,
+    EditWorkgroup,
+    GetDepartment,
     GetEmployee,
     GetWorkgroup,
     ListEmployees,
@@ -25,4 +31,8 @@ urlpatterns = [
     path('add/employee/', AddEmployee.as_view(), name='add_employee'),
     path('add/workgroup/', AddWorkgroup.as_view(), name='add_workgroup'),
     path('add/department/', AddDepartment.as_view(), name='add_department'),
+
+    path('edit/employee/<pk>/', EditEmployee.as_view(), name='edit_employee'),
+    path('edit/workgroup/<pk>/', EditWorkgroup.as_view(), name='edit_workgroup'),  # noqa
+    path('edit/department/<pk>/', EditDepartment.as_view(), name='edit_department'),  # noqa
 ]

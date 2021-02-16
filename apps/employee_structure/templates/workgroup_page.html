@@ -6,5 +6,6 @@
     <p> <b>Department:  </b> {{ workgroup.department }} </p>
 
     <a href="{% url 'delete_workgroup' pk=workgroup.pk %}">DELETE</a>
+    <a href="{% url 'edit_workgroup' pk=workgroup.pk %}">EDIT</a>
 
 {% endblock %}

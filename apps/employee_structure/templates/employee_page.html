@@ -11,5 +11,6 @@
     <p> <b>Vacation days:   </b> {{ employee.vacation_days }}           </p>
 
     <a href="{% url 'delete_employee' pk=employee.pk %}">DELETE</a>
+    <a href="{% url 'edit_employee' pk=employee.pk %}">EDIT</a>
 
 {% endblock %}

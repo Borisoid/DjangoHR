@@ -1,5 +1,5 @@
 from django.shortcuts import (  # noqa
-    render,
+    redirect, render,
 )
 from django.views.generic import (  # noqa
     CreateView,
@@ -88,6 +88,14 @@ class DeleteEmployee(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('employee_list')
 
 
+class EditEmployee(LoginRequiredMixin, UpdateView):
+    model = Employee
+    fields = '__all__'
+    template_name = 'form_page.html'
+    template_name_suffix = 'form'
+    success_url = reverse_lazy('employee_list')
+
+
 class AddEmployee(LoginRequiredMixin, CreateView):
     model = Employee
     fields = '__all__'
@@ -119,6 +127,14 @@ class DeleteWorkgroup(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('employee_list')
 
 
+class EditWorkgroup(LoginRequiredMixin, UpdateView):
+    model = Workgroup
+    fields = '__all__'
+    template_name = 'form_page.html'
+    template_name_suffix = 'form'
+    success_url = reverse_lazy('employee_list')
+
+
 class AddDepartment(LoginRequiredMixin, CreateView):
     model = Department
     fields = '__all__'
@@ -139,4 +155,12 @@ class GetDepartment(LoginRequiredMixin, ListView):
 class DeleteDepartment(LoginRequiredMixin, DeleteView):
     model = Department
     template_name = 'submit_delete_page.html'
+    success_url = reverse_lazy('employee_list')
+
+
+class EditDepartment(LoginRequiredMixin, UpdateView):
+    model = Department
+    fields = '__all__'
+    template_name = 'form_page.html'
+    template_name_suffix = 'form'
     success_url = reverse_lazy('employee_list')
