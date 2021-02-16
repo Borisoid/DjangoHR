@@ -18,9 +18,14 @@ from django.urls import (
     path,
     include,
 )
+from django.shortcuts import (
+    redirect,
+)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.user.urls')),
     path('', include('apps.employee_structure.urls')),
+    path('', lambda request: redirect('employee_list')),
 ]
