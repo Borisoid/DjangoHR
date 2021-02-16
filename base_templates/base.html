@@ -19,7 +19,7 @@
         a {
             margin: 10px;
         }
-        a.login {
+        a.log_in_out {
             margin-left: auto;
         }
     </style>
@@ -32,8 +32,12 @@
         {% endblock %}
 
         <!-- LOGIN -->
-        <a href="/login/" class="login">LOGIN</a>
-        <a href="/logout/">LOGOUT</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'log_out' %}" class="log_in_out">LOGOUT</a>
+        {% else %}
+            <a href="{% url 'log_in' %}" class="log_in_out">LOGIN</a>
+        {% endif %}
+        
 
     </header>
     

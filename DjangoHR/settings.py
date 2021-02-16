@@ -126,7 +126,8 @@ STATIC_URL = '/static/'
 
 LOGIN_URL = '/login/'
 
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/view/employee_list/'
+LOGOUT_REDIRECT_URL = '/login/'
 
 LOGGING = {
     "version": 1,
