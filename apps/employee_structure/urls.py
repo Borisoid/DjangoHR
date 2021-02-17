@@ -13,13 +13,17 @@ from .views import (
     EditWorkgroup,
     GetDepartment,
     GetEmployee,
-    GetWorkgroup,
+    GetWorkgroup, ListDepartments,
     ListEmployees,
+    ListWorkgroups,
 )
 
 
 urlpatterns = [
     path('view/employee_list/', ListEmployees.as_view(), name='employee_list'),
+    path('view/workgroup_list/', ListWorkgroups.as_view(), name='workgroup_list'),  # noqa
+    path('view/department_list/', ListDepartments.as_view(), name='department_list'),  # noqa
+
     path('view/employee/<pk>/', GetEmployee.as_view(), name='view_employee'),
     path('view/workgroup/<pk>/', GetWorkgroup.as_view(), name='view_workgroup'),  # noqa
     path('view/department/<pk>', GetDepartment.as_view(), name='view_department'),  # noqa

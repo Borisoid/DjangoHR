@@ -1,0 +1,41 @@
+{% extends 'header.html' %}
+
+{% block title %} Workgroups {% endblock %}
+
+{% block content %}
+
+<form method="get">
+    {{ filter_form.as_p }}
+    <button type="submit">Filter</button>
+</form>
+<br>
+
+{% if workgroups %}
+    <table>
+        <th>Name</th>
+        <th>Department</th>
+
+        {% for workgroup in workgroups %}
+
+        <tr>
+            <td>
+                <a href="{% url 'view_workgroup' pk=workgroup.pk %}">
+                    {{ workgroup.name }}
+                </a>
+            </td>
+            <td>
+                <a href="{% url 'view_department' pk=workgroup.department.pk %}">
+                    {{ workgroup.department }}
+                </a>
+            </td>
+                
+        </tr>
+
+        {% endfor %}
+
+    </table>
+{% else %}
+    Nothing found
+{% endif %}
+
+{% endblock %}

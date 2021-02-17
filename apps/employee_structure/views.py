@@ -21,7 +21,9 @@ from .models import (
     Department,
 )
 from .forms import (
-    EmployeeFilrerForm,
+    EmployeeFilterForm,
+    WorkgroupFilterForm,
+    DepartmentFilterForm,
 )
 
 
@@ -35,7 +37,7 @@ class ListEmployees(LoginRequiredMixin, ListView):
 
         if self.request.GET:
 
-            form = EmployeeFilrerForm(self.request.GET)
+            form = EmployeeFilterForm(self.request.GET)
             if form.is_valid():
                 form.cleaned_data = {
                     key: value
@@ -62,7 +64,72 @@ class ListEmployees(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['filter_form'] = EmployeeFilrerForm(self.request.GET)
+        context['filter_form'] = EmployeeFilterForm(self.request.GET)
+        return context
+
+
+class ListWorkgroups(LoginRequiredMixin, ListView):
+    template_name = 'workgroup_list.html'
+    context_object_name = 'workgroups'
+
+    def get_queryset(self):
+        queryset = Workgroup.objects \
+            .prefetch_related('department')
+
+        if self.request.GET:
+
+            form = WorkgroupFilterForm(self.request.GET)
+            if form.is_valid():
+                form.cleaned_data = {
+                    key: value
+                    for key, value
+                    in form.cleaned_data.items()
+                    if value
+                }
+
+                name = form.cleaned_data.pop('name', None)
+                if name:
+                    queryset = queryset.filter(name__icontains=name)
+
+                department = form.cleaned_data.pop('department', None)
+                if department:
+                    queryset = queryset.filter(department=department)
+
+        return queryset.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter_form'] = WorkgroupFilterForm(self.request.GET)
+        return context
+
+
+class ListDepartments(LoginRequiredMixin, ListView):
+    template_name = 'department_list.html'
+    context_object_name = 'departments'
+
+    def get_queryset(self):
+        queryset = Department.objects
+
+        if self.request.GET:
+
+            form = DepartmentFilterForm(self.request.GET)
+            if form.is_valid():
+                form.cleaned_data = {
+                    key: value
+                    for key, value
+                    in form.cleaned_data.items()
+                    if value
+                }
+
+                name = form.cleaned_data.pop('name', None)
+                if name:
+                    queryset = queryset.filter(name__icontains=name)
+
+        return queryset.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter_form'] = DepartmentFilterForm(self.request.GET)
         return context
 
 
