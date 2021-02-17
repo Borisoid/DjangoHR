@@ -1,6 +1,12 @@
 from django.db import (
     models,
 )
+from django.core.validators import (
+    MinValueValidator,
+)
+from decimal import (
+    Decimal,
+)
 
 
 class Department(models.Model):
@@ -19,10 +25,13 @@ class Workgroup(models.Model):
 
 
 class Employee(models.Model):
-    name = models.CharField(max_length=90, null=False, blank=False)
-    occupation = models.CharField(max_length=90, null=False, blank=False)
+    name = models.CharField(max_length=90)
+    occupation = models.CharField(max_length=90)
     experience = models.PositiveIntegerField()
-    salary = models.DecimalField(max_digits=8, decimal_places=2)
+    salary = models.DecimalField(
+        max_digits=8, decimal_places=2,
+        validators=[MinValueValidator(Decimal('0.01'))]
+    )
     vacation_days = models.PositiveIntegerField()
 
     workgroup = models.ForeignKey(
