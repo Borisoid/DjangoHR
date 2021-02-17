@@ -14,6 +14,9 @@ from django.contrib.auth.mixins import (
 from django.urls import (
     reverse_lazy,
 )
+from django import (
+    forms,
+)
 
 from .models import (
     Employee,
@@ -157,6 +160,11 @@ class AddEmployee(LoginRequiredMixin, CreateView):
     template_name = 'form_page.html'
     success_url = reverse_lazy('employee_list')
 
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+        form.fields['hired_date'].widget = forms.DateInput(format=r'%Y-%m-%d')
+        return form
+
 
 class AddWorkgroup(LoginRequiredMixin, CreateView):
     model = Workgroup
@@ -196,6 +204,11 @@ class EditEmployee(LoginRequiredMixin, UpdateView):
     template_name = 'form_page.html'
     template_name_suffix = 'form'
     success_url = reverse_lazy('employee_list')
+
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+        form.fields['hired_date'].widget = forms.DateInput(format=r'%Y-%m-%d')
+        return form
 
 
 class EditWorkgroup(LoginRequiredMixin, UpdateView):
