@@ -31,7 +31,7 @@ class ListEmployees(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = Employee.objects \
-            .prefetch_related('workgroup', 'workgroup__department')
+            .prefetch_related('workgroup__department')
 
         if self.request.GET:
 
